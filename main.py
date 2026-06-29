@@ -344,32 +344,32 @@
 # file.close()
 
 
-import auditTrail
-print ("Welcome to your bank account")
-balance = 0
-while True:
-    print("\nSelect an option:")
-    print("1. Deposit")
-    print("2. Withdraw")
-    print("3. Check Balance")
-    print("4. Exit")
+# import auditTrail
+# print ("Welcome to your bank account")
+# balance = 0
+# while True:
+#     print("\nSelect an option:")
+#     print("1. Deposit")
+#     print("2. Withdraw")
+#     print("3. Check Balance")
+#     print("4. Exit")
     
-    choice = input("Enter your choice (1-4): ")
+#     choice = input("Enter your choice (1-4): ")
     
-    if choice == "1":
-        amount = int(input("Enter amount to deposit: "))
-        balance = auditTrail.deposit(balance, amount)
+#     if choice == "1":
+#         amount = int(input("Enter amount to deposit: "))
+#         balance = auditTrail.deposit(balance, amount)
         
-    elif choice == "2":
-        amount = int(input("Enter amount to withdraw: "))
-        balance = auditTrail.withdraw(balance, amount)
+#     elif choice == "2":
+#         amount = int(input("Enter amount to withdraw: "))
+#         balance = auditTrail.withdraw(balance, amount)
         
-    elif choice == "3":
-        balance = auditTrail.check_balance(balance)
+#     elif choice == "3":
+#         balance = auditTrail.check_balance(balance)
         
-    elif choice == "4":
-        print("Exiting the application.")
-        break
+#     elif choice == "4":
+#         print("Exiting the application.")
+#         break
         
-    else:
-        print("Invalid choice. Please try again.")
+#     else:
+#         print("Invalid choice. Please try again.")

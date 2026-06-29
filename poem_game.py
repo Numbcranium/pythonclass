@@ -1,5 +1,5 @@
 # Collaborative Poem Game - Console Based
-# Parts 1-6: Player Setup + Random Selection + Game State + Game Loop + Poem Display + End Game
+# Parts 1-8: Player Setup + Random Selection + Game State + Game Loop + Poem Display + End Game + Final Poem + Polish
 
 import random
 
@@ -111,8 +111,25 @@ def prompt_player_for_line(state):
 
     print(f"--- Turn {turn_num} of {total} ---")
     print(f"It's {player}'s turn.")
-    line = input(f"{player}, enter your line: ").strip()
+    while True:
+        line = input(f"{player}, enter your line: ").strip()
+        if line:
+            break
+        print("  Your line cannot be empty. Please write something!")
     add_line(state, player, line)
+    print()
+
+
+def display_final_poem(state):
+    """Print the completed poem in clean form without contributor tags."""
+    print("=" * 50)
+    print("   THE COMPLETED POEM")
+    print("=" * 50)
+    print()
+    for _, line in state["poem_lines"]:
+        print(f"  {line}")
+    print()
+    print("=" * 50)
     print()
 
 
@@ -140,13 +157,36 @@ def run_game_loop(state):
         display_poem(state)
 
     end_game(state)
+    display_final_poem(state)
+
+
+def ask_replay():
+    """Ask players if they want another round. Returns True/False."""
+    while True:
+        answer = input("Play again with the same players? (yes / no): ").strip().lower()
+        if answer in ("yes", "y"):
+            return True
+        if answer in ("no", "n"):
+            return False
+        print("  Please type 'yes' or 'no'.")
+
+
+def main():
+    try:
+        players = get_players()
+        while True:
+            state = create_game_state(players)
+            starter = pick_starting_player(players)
+            state["turn_order"] = get_turn_order(players, starter)
+            run_game_loop(state)
+            if not ask_replay():
+                print()
+                print("Thanks for playing! Goodbye.")
+                break
+            print()
+    except KeyboardInterrupt:
+        print("\n\nGame interrupted. Goodbye!")
 
 
 if __name__ == "__main__":
-    players = get_players()
-    state = create_game_state(players)
-    starter = pick_starting_player(players)
-    state["turn_order"] = get_turn_order(players, starter)
-    run_game_loop(state)
-    print("[DEBUG] Game loop finished.")
-    print(f"[DEBUG] Lines collected: {state['poem_lines']}")
+    main()
