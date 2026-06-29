@@ -1,5 +1,5 @@
 # Collaborative Poem Game - Console Based
-# Parts 1-5: Player Setup + Random Selection + Game State + Game Loop + Poem Display
+# Parts 1-6: Player Setup + Random Selection + Game State + Game Loop + Poem Display + End Game
 
 import random
 
@@ -116,6 +116,18 @@ def prompt_player_for_line(state):
     print()
 
 
+def end_game(state):
+    """Mark the game as over and print the closing message."""
+    state["game_over"] = True
+    print("=" * 50)
+    print("   GAME OVER — All players have had their turn!")
+    print("=" * 50)
+    print()
+    contributors = ", ".join(state["turn_order"])
+    print(f"This poem was written by: {contributors}")
+    print()
+
+
 def run_game_loop(state):
     """Drive the game from first turn to last."""
     print("=" * 50)
@@ -126,6 +138,8 @@ def run_game_loop(state):
     while not is_game_over(state):
         prompt_player_for_line(state)
         display_poem(state)
+
+    end_game(state)
 
 
 if __name__ == "__main__":
