@@ -6,7 +6,7 @@ import random
 def get_players():
     """Collect player names from input."""
     print("=" * 50)
-    print("   COLLABORATIVE POEM GAME")
+    print("=" * 20 + "POEM GAME" + "=" * 21)
     print("=" * 50)
     print()
 
@@ -45,7 +45,7 @@ def create_game_state(players):
         "players": players,
         "turn_order": [],
         "current_turn_index": 0,
-        "poem_lines": [],        # list of (player_name, line) tuples
+        "poem_lines": [],    
         "turns_completed": 0,
         "game_over": False,
     }
@@ -95,7 +95,7 @@ def display_poem(state, heading="The Poem So Far"):
     print(f"  {heading}")
     print("-" * 50)
     if not state["poem_lines"]:
-        print("  (no lines yet)")
+        print("no lines yet")
     else:
         for player, line in state["poem_lines"]:
             print(f"  {line}  [{player}]")
@@ -121,13 +121,13 @@ def prompt_player_for_line(state):
 
 
 def display_final_poem(state):
-    """Print the completed poem in clean form without contributor tags."""
+    """Print the completed poem."""
     print("=" * 50)
     print("   THE COMPLETED POEM")
     print("=" * 50)
     print()
     for _, line in state["poem_lines"]:
-        print(f"  {line}")
+        print(line)
     print()
     print("=" * 50)
     print()
