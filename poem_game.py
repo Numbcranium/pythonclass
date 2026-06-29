@@ -1,5 +1,5 @@
 # Collaborative Poem Game - Console Based
-# Parts 1-2: Player Setup + Random Selection
+# Parts 1-3: Player Setup + Random Selection + Game State
 
 import random
 
@@ -39,6 +39,35 @@ def get_players():
     return players
 
 
+def create_game_state(players):
+    """Initialise and return a fresh game state dictionary."""
+    return {
+        "players": players,
+        "turn_order": [],
+        "current_turn_index": 0,
+        "poem_lines": [],        # list of (player_name, line) tuples
+        "turns_completed": 0,
+        "game_over": False,
+    }
+
+
+def current_player(state):
+    """Return the name of the player whose turn it is."""
+    return state["turn_order"][state["current_turn_index"]]
+
+
+def add_line(state, player, line):
+    """Record a poem line and advance the turn index."""
+    state["poem_lines"].append((player, line))
+    state["turns_completed"] += 1
+    state["current_turn_index"] += 1
+
+
+def is_game_over(state):
+    """Return True when every player has had exactly one turn."""
+    return state["turns_completed"] >= len(state["players"])
+
+
 def pick_starting_player(players):
     """Randomly select the first player to start the poem."""
     starter = random.choice(players)
@@ -62,6 +91,9 @@ def get_turn_order(players, starter):
 
 if __name__ == "__main__":
     players = get_players()
+    state = create_game_state(players)
     starter = pick_starting_player(players)
-    turn_order = get_turn_order(players, starter)
-    print(f"[DEBUG] Turn order: {turn_order}")
+    state["turn_order"] = get_turn_order(players, starter)
+    print(f"[DEBUG] State: {state}")
+    print(f"[DEBUG] Current player: {current_player(state)}")
+    print(f"[DEBUG] Game over: {is_game_over(state)}")
