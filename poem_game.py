@@ -1,5 +1,5 @@
 # Collaborative Poem Game - Console Based
-# Parts 1-3: Player Setup + Random Selection + Game State
+# Parts 1-4: Player Setup + Random Selection + Game State + Game Loop
 
 import random
 
@@ -89,11 +89,35 @@ def get_turn_order(players, starter):
     return order
 
 
+def prompt_player_for_line(state):
+    """Ask the current player to enter their poem line and record it."""
+    player = current_player(state)
+    turn_num = state["turns_completed"] + 1
+    total = len(state["players"])
+
+    print(f"--- Turn {turn_num} of {total} ---")
+    print(f"It's {player}'s turn.")
+    line = input(f"{player}, enter your line: ").strip()
+    add_line(state, player, line)
+    print()
+
+
+def run_game_loop(state):
+    """Drive the game from first turn to last."""
+    print("=" * 50)
+    print("   LET THE POEM BEGIN!")
+    print("=" * 50)
+    print()
+
+    while not is_game_over(state):
+        prompt_player_for_line(state)
+
+
 if __name__ == "__main__":
     players = get_players()
     state = create_game_state(players)
     starter = pick_starting_player(players)
     state["turn_order"] = get_turn_order(players, starter)
-    print(f"[DEBUG] State: {state}")
-    print(f"[DEBUG] Current player: {current_player(state)}")
-    print(f"[DEBUG] Game over: {is_game_over(state)}")
+    run_game_loop(state)
+    print("[DEBUG] Game loop finished.")
+    print(f"[DEBUG] Lines collected: {state['poem_lines']}")
