@@ -229,3 +229,147 @@
   
 # numbers = [8, 1, 4, 1, 7, 9]
 # print(f"The second largest number is: {secondLargest(numbers)}")
+
+# def palindromeChecker(str):
+#     newStr = str[::-1]
+#     if str == newStr :
+#         return True
+#     else : return False 
+
+# print(palindromeChecker("Joanna"))
+
+# def armstrongNumber(a, b) :
+#     raisePower = len(a)
+#     sum = 0
+#     for i in a :
+#         sum += i**raisePower
+        
+#     if sum == b :
+#         return "Yes, it is an Armstrong Number"
+#     else :
+#         return False 
+    
+# print(armstrongNumber([1,5,], 26))
+# prices = [10,20,30,40,50]
+
+# print(prices[1:-1])
+# matrix = (
+#     (1,2,3),
+#     (4,5,6),
+#     (7,8,9)
+# )
+
+# print(matrix[-1][1])
+
+# def simpleMaths(a, b):
+#     add = a + b
+#     sub = a - b
+#     mul = a * b
+#     mod = a % b
+#     div = a / b
+    
+#     return add, sub, mul, mod, div
+
+# print(simpleMaths(10, 5))
+
+
+# count the frequency of each character in any given string
+# banana
+# b:1
+# a:3
+# n:2
+
+# def frequency_count(text):
+#     counts = {}
+#     for char in text:
+#         counts[char] = counts.get(char, 0) + 1
+        
+#     return counts
+    
+# print(frequency_count("banana"))
+
+# # return the first non-repeating character
+# # aaabbbcdde
+# # => c
+
+# def non_repeating(text):
+#     counts = {}
+#     for char in text:
+#         counts[char] = counts.get(char, 0) + 1
+        
+#     for char in counts:
+#         if counts[char] == 1:
+#             return char
+        
+# print(non_repeating("aaabbbcdde"))
+
+# # write python program to return duplicate from the given list
+# # [2,1,3,1,2,4,5] => [2,1]
+
+# def only_duplicates(numbers):
+#     counts = {}
+#     duplicates = []
+    
+#     for number in numbers:
+#         counts[number] = counts.get(number, 0) + 1
+        
+#         if counts[number] == 2:
+#             duplicates.append(number)
+            
+#     return duplicates
+
+# print(only_duplicates([2,1,3,1,2,4,5]))
+
+# # write a python function to return the indexes of the two numbers that their sum is equal target
+# # [2,7,11,15] target = 9
+# # [0,1]
+
+# def target_sum(numbers, target):
+#     result = {}
+    
+#     for index, num in enumerate(numbers):
+#         remainder = target - num
+#         if remainder in result:
+#             return (result[remainder], index)
+#         result[num] = index
+        
+#     return "No two numbers found that sum to the target."
+
+# print(target_sum([4,12,5,54], 9)) 
+
+# file = open("studentlists.txt", "r")
+# content = file.read()
+# print(content.split("\n"))
+
+# file.close()
+
+
+import auditTrail
+print ("Welcome to your bank account")
+balance = 0
+while True:
+    print("\nSelect an option:")
+    print("1. Deposit")
+    print("2. Withdraw")
+    print("3. Check Balance")
+    print("4. Exit")
+    
+    choice = input("Enter your choice (1-4): ")
+    
+    if choice == "1":
+        amount = int(input("Enter amount to deposit: "))
+        balance = auditTrail.deposit(balance, amount)
+        
+    elif choice == "2":
+        amount = int(input("Enter amount to withdraw: "))
+        balance = auditTrail.withdraw(balance, amount)
+        
+    elif choice == "3":
+        balance = auditTrail.check_balance(balance)
+        
+    elif choice == "4":
+        print("Exiting the application.")
+        break
+        
+    else:
+        print("Invalid choice. Please try again.")
