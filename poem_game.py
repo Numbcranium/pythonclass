@@ -140,6 +140,9 @@ def end_game(state):
     print("   GAME OVER — All players have had their turn!")
     print("=" * 50)
     print()
+    contributors = ", ".join(state["turn_order"])
+    print(f"This poem was written by: {contributors}")
+    print()
 
 
 def run_game_loop(state):
