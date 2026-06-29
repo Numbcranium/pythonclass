@@ -120,14 +120,22 @@ def prompt_player_for_line(state):
     print()
 
 
+def format_line(line, is_last):
+    """Capitalise first letter and end with comma or full stop."""
+    line = line[0].upper() + line[1:] if line else line
+    line = line.rstrip(",.")
+    return line + ("." if is_last else ",")
+
+
 def display_final_poem(state):
-    """Print the completed poem."""
+    """Print the completed poem with punctuation and capitalisation."""
     print("=" * 50)
     print("   THE COMPLETED POEM")
     print("=" * 50)
     print()
-    for _, line in state["poem_lines"]:
-        print(line)
+    lines = state["poem_lines"]
+    for i, (_, line) in enumerate(lines):
+        print(f"  {format_line(line, is_last=(i == len(lines) - 1))}")
     print()
     print("=" * 50)
     print()
