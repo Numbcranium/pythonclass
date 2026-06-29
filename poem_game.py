@@ -1,5 +1,7 @@
 # Collaborative Poem Game - Console Based
-# Part 1: Player Setup
+# Parts 1-2: Player Setup + Random Selection
+
+import random
 
 def get_players():
     """Collect player names from input."""
@@ -37,6 +39,29 @@ def get_players():
     return players
 
 
+def pick_starting_player(players):
+    """Randomly select the first player to start the poem."""
+    starter = random.choice(players)
+    print(f"Randomly selecting who goes first...")
+    print(f">>> {starter} will start the poem! <<<")
+    print()
+    return starter
+
+
+def get_turn_order(players, starter):
+    """Build a randomised turn order starting from the selected player."""
+    remaining = [p for p in players if p != starter]
+    random.shuffle(remaining)
+    order = [starter] + remaining
+    print("Turn order for this round:")
+    for i, name in enumerate(order, 1):
+        print(f"  {i}. {name}")
+    print()
+    return order
+
+
 if __name__ == "__main__":
     players = get_players()
-    print(f"[DEBUG] Players list: {players}")
+    starter = pick_starting_player(players)
+    turn_order = get_turn_order(players, starter)
+    print(f"[DEBUG] Turn order: {turn_order}")
